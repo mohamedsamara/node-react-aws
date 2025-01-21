@@ -1,0 +1,26 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 20
+    commands:
+      - echo "Installing Yarn and TypeScript globally..."
+      - npm install -g yarn typescript --retries=5 --timeout=60000 --fetch-timeout=60000 --fetch-retries=5
+      - echo "Installing frontend dependencies..."
+      - cd client && yarn install
+      - cd ..
+
+  build:
+    commands:
+      - echo "Building frontend..."
+      - cd client && yarn build # Build the frontend (React)
+
+artifacts:
+  files:
+    - "**/*"
+  base-directory: client/dist
+
+cache:
+  paths:
+    - client/node_modules/**/* # Cache frontend dependencies

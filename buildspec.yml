@@ -1,0 +1,41 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 20
+    commands:
+      - echo "Installing Yarn and TypeScript globally..."
+      - npm install -g yarn typescript --retries=5 --timeout=60000 --fetch-timeout=60000 --fetch-retries=5
+      - echo "Installing backend dependencies..."
+      - cd server && yarn install
+      - cd ..
+
+  build:
+    commands:
+      - echo "Building backend..."
+      - cd server && yarn build # Build the backend (Node.js)
+      - cd ..
+
+  post_build:
+    commands:
+      - echo Copying necessary files into server/dist...
+
+      # Copy the appspec.yml to the 'server/dist' directory
+      - cp appspec.yml server/dist/
+
+      # Copy the entire 'scripts' folder into 'server/dist'
+      - cp -r scripts server/dist/
+
+      # Copy package.json and yarn.lock into dist
+      - cp server/package.json server/dist/
+      - cp server/yarn.lock server/dist/
+
+artifacts:
+  files:
+    - "**/*"
+  base-directory: server/dist
+
+cache:
+  paths:
+    - server/node_modules/**/* # Cache backend dependencies

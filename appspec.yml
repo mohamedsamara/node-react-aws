@@ -1,0 +1,23 @@
+version: 0.0
+os: linux
+
+# 1. Define the files to be deployed to S3 and EC2
+files:
+  # Deploy backend code to EC2
+  - source: /
+    destination: /home/ec2-user/app/ # Destination path on EC2
+
+# 2. Define the lifecycle hooks for EC2 deployment
+hooks:
+  # After the backend files are deployed, install dependencies and restart the app
+  BeforeInstall:
+    - location: scripts/remove_old_files.sh
+      timeout: 300
+    - location: scripts/set_env_vars.sh
+      timeout: 300
+  Install:
+    - location: scripts/install_dependencies.sh
+      timeout: 300
+  ApplicationStart:
+    - location: scripts/restart_app.sh
+      timeout: 300
