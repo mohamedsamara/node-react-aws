@@ -30,14 +30,11 @@ echo "DB_PORT=$DB_PORT" >> $LOG_FILE
 echo "DB_USERNAME=$DB_USERNAME" >> $LOG_FILE
 echo "DB_PASSWORD=$DB_PASSWORD" >> $LOG_FILE
 echo "DB_NAME=$DB_NAME" >> $LOG_FILE
+echo "NODE_ENV=$NODE_ENV" >> $LOG_FILE
 
 # Check PM2 list output to debug
 echo "Checking if PM2 list shows backend app..." >> $LOG_FILE
 pm2 list >> $LOG_FILE
-
-# Set NODE_ENV to production or development
-echo "Setting NODE_ENV..." >> $LOG_FILE
-export NODE_ENV=production  # You can change this to "development" as needed
 
 # Kill any existing PM2 processes (this is a clean-up step)
 echo "Killing existing PM2 processes..." >> $LOG_FILE

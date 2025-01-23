@@ -28,6 +28,9 @@ else
     echo "PM2 is already installed"
 fi
 
+# Set correct permissions for the app (to ensure the ec2-user can write to it)
+sudo chown -R ec2-user:ec2-user /home/ec2-user/app
+
 # Now install the dependencies using Yarn
 echo "Installing backend dependencies..."
 cd /home/ec2-user/app  # Ensure this path matches your directory structure

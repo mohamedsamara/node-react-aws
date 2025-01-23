@@ -1,0 +1,40 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Resources:
+  # # SSM Parameter Store for DB Username
+  # DBUsernameParameter:
+  #   Type: AWS::SSM::Parameter
+  #   Properties:
+  #     Name: "/node-react-aws/DB_USERNAME"
+  #     Type: "String"
+  #     Value: !ImportValue DBUsername
+
+  # # SSM Parameter Store for DB Password
+  # DBPasswordParameter:
+  #   Type: AWS::SSM::Parameter
+  #   Properties:
+  #     Name: "/node-react-aws/DB_PASSWORD"
+  #     Type: "String"
+  #     Value: !ImportValue DBPassword
+
+  # SSM Parameter Store for DB Host (RDS endpoint)
+  DBHostParameter:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: "/node-react-aws/DB_HOST"
+      Type: "String"
+      Value: !ImportValue DBEndpoint
+
+  DBNameParameter:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: "/node-react-aws/DB_NAME"
+      Type: "String"
+      Value: !ImportValue DBName
+
+  # SSM Parameter Store for DB Port (PostgreSQL default port)
+  DBPortParameter:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: "/node-react-aws/DB_PORT"
+      Type: "String"
+      Value: "5432"
