@@ -9,12 +9,15 @@ echo "Running set_permissions.sh at $(date)" >> $LOG_FILE
 echo "Changing ownership of files..." >> $LOG_FILE
 chown -R ec2-user:ec2-user /home/ec2-user/app
 
-# Set directory permissions to 755 (read/write/execute for ec2-user, read/execute for group/others)
+# Set directory permissions to 755 (read/write/execute for ec2-user)
 echo "Setting directory permissions to 755..." >> $LOG_FILE
 find /home/ec2-user/app -type d -exec chmod 755 {} \;
 
-# Set file permissions to 644 (read/write for ec2-user, read-only for group/others)
+# Set file permissions to 644 (read/write for ec2-user)
 echo "Setting file permissions to 644..." >> $LOG_FILE
 find /home/ec2-user/app -type f -exec chmod 644 {} \;
+
+# Give execute permission to all .sh files in the scripts directory
+find /home/ec2-user/app/scripts -type f -name "*.sh" -exec chmod +x {} \;
 
 echo "Permissions set successfully at $(date)" >> $LOG_FILE

@@ -37,7 +37,6 @@ else
 fi
 
 # Now install the dependencies using Yarn
-# Now install the dependencies using Yarn
 echo "Installing backend dependencies..." >> $LOG_FILE
 cd /home/ec2-user/app  # Ensure this path matches your directory structure
 yarn install >> $LOG_FILE 2>&1

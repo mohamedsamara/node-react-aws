@@ -14,12 +14,6 @@ else
     echo "Failed to delete yarn.lock." >> $LOG_FILE
 fi
 
-if sudo rm -f /home/ec2-user/app/package.json; then
-    echo "package.json deleted successfully." >> $LOG_FILE
-else
-    echo "Failed to delete package.json." >> $LOG_FILE
-fi
-
 # Final log entry
 echo "Old files deleted." >> $LOG_FILE
 echo "delete_old_files.sh completed at $(date)" >> $LOG_FILE
