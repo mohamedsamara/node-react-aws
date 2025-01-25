@@ -11,6 +11,10 @@ files:
 hooks:
   # After the backend files are deployed, install dependencies and restart the app
   BeforeInstall:
+    - location: scripts/setup_logging.sh
+      timeout: 300
+    - location: scripts/set_permissions.sh
+      timeout: 300
     - location: scripts/remove_old_files.sh
       timeout: 300
     - location: scripts/set_env_vars.sh

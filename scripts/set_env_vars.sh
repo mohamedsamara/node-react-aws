@@ -1,5 +1,9 @@
 #!/bin/bash
 
+LOG_FILE="/home/ec2-user/app/deployment.log"
+
+echo "Running fetch_and_set_env_vars.sh at $(date)" >> $LOG_FILE
+
 # Fetch environment variables from SSM Parameter Store
 echo "Fetching environment variables from SSM..."
 
@@ -19,8 +23,8 @@ echo "DB_HOST=$DB_HOST"
 echo "DB_PORT=$DB_PORT"
 echo "DB_USERNAME=$DB_USERNAME"
 echo "DB_PASSWORD=$DB_PASSWORD"
-echo "DB_NAME=$DB_NAME"
-echo "NODE_ENV=$NODE_ENV"
+echo "DB_NAME=$DB_NAME" >> $LOG_FILE
+echo "NODE_ENV=$NODE_ENV" >> $LOG_FILE
 
 # Remove existing entries for these variables in .bash_profile to prevent duplicates
 sed -i '/export DB_HOST=/d' /home/ec2-user/.bash_profile
@@ -39,9 +43,11 @@ set_or_replace_var() {
   if grep -q "^export $VAR_NAME=" /home/ec2-user/.bash_profile; then
     # If the variable exists, replace the line
     sed -i "s|^export $VAR_NAME=.*|export $VAR_NAME=\"$ESCAPED_VALUE\"|" /home/ec2-user/.bash_profile
+    echo "Updated $VAR_NAME in .bash_profile" >> $LOG_FILE
   else
     # If the variable doesn't exist, append it to the .bash_profile
     echo "export $VAR_NAME=\"$ESCAPED_VALUE\"" >> /home/ec2-user/.bash_profile
+    echo "Added $VAR_NAME to .bash_profile" >> $LOG_FILE
   fi
 }
 
@@ -55,4 +61,11 @@ set_or_replace_var "DB_NAME" "$DB_NAME"
 # Source the .bash_profile to make the environment variables available
 source /home/ec2-user/.bash_profile
 
-echo "Environment variables set successfully!"
+if [ $? -eq 0 ]; then
+    echo ".bash_profile sourced successfully." >> $LOG_FILE
+else
+    echo "Error sourcing .bash_profile." >> $LOG_FILE
+    exit 1
+fi
+
+echo "Environment variables set successfully!" >> $LOG_FILE
