@@ -9,7 +9,7 @@ This project consists of a React frontend, a Node.js backend, and infrastructure
 - Infrastructure: The infrastructure is defined using CloudFormation templates and organized into separate stacks for modularity.
 - CI/CD Pipeline: The project uses AWS CodePipeline, CodeBuild, and CodeDeploy to automate the deployment process utilizing `buildspec.yml`, `buildspec-frontend.yml`, and `appspec.yml`.
 
-## CloudFormation Features
+## ☁️&nbsp; CloudFormation Features
 
 - IAM Roles Stack: Defines IAM roles for AWS services, including CodeBuild, CodeDeploy, CodePipeline, and EC2.
 - S3 Buckets Stack: Contains S3 buckets for CodePipeline (backend and frontend) artifacts and frontend build (dist) artifacts.
@@ -25,7 +25,7 @@ This project consists of a React frontend, a Node.js backend, and infrastructure
 - Backend Deployment: The backend code is pushed to an S3 bucket as an artifact, which is then deployed to the EC2 instance using CodeDeploy.
 - Frontend Deployment: The frontend React app is pushed to S3 and distributed through CloudFront for fast content delivery.
 
-## Key Pair for EC2 Access
+## 🔑&nbsp; Key Pair for EC2 Access
 
 In order to securely access your EC2 instance, you will need to provide your own EC2 Key Pair. You can either create a new key pair or use an existing one from the AWS Console.
 
@@ -71,7 +71,7 @@ ssh -i /path/to/your-key-pair.pem ec2-user@<EC2_INSTANCE_PUBLIC_IP>
    --capabilities CAPABILITY_IAM
    ```
 
-## Setup Instructions
+## 🛠️&nbsp; Setup Instructions
 
 1. Start the Backend Server and Frontend
 
