@@ -25,6 +25,26 @@ This project consists of a React frontend, a Node.js backend, and infrastructure
 - Backend Deployment: The backend code is pushed to an S3 bucket as an artifact, which is then deployed to the EC2 instance using CodeDeploy.
 - Frontend Deployment: The frontend React app is pushed to S3 and distributed through CloudFront for fast content delivery.
 
+## Key Pair for EC2 Access
+
+In order to securely access your EC2 instance, you will need to provide your own EC2 Key Pair. You can either create a new key pair or use an existing one from the AWS Console.
+
+- Update the Key Pair Name in CloudFormation
+
+  In the [infrastructure/ec2-instance.yml](infrastructure/ec2-instance.yml) file, replace the KeyPairName parameter with the name of your key pair:
+
+  ```yml
+  KeyPairName: <Your-KeyPair-Name>
+  ```
+
+## Accessing the EC2 Instance
+
+After the EC2 instance is launched, you can SSH into the instance using the .pem file and the public IP address of the instance.
+
+```bash
+ssh -i /path/to/your-key-pair.pem ec2-user@<EC2_INSTANCE_PUBLIC_IP>
+```
+
 ## CloudFormation Instructions
 
 1. Upload Infrastructure Code to S3

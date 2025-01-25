@@ -5,7 +5,22 @@
     "build": "concurrently \"cd client && yarn build\" \"cd server && yarn build\"",
     "start": "concurrently \"cd client && yarn preview\" \"cd server && yarn start\""
   },
-  "keywords": [],
+  "keywords": [
+    "node",
+    "react",
+    "aws",
+    "aws-cloudformation",
+    "aws-iam",
+    "aws-vpc",
+    "aws-ec2",
+    "aws-rds",
+    "aws-s3",
+    "aws-ssm",
+    "aws-codebuild",
+    "aws-codepipeline",
+    "aws-codedeploy",
+    "aws-cloudfront"
+  ],
   "author": "Mohamed Samara (https://github.com/mohamedsamara)",
   "license": "MIT",
   "devDependencies": {
