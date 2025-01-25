@@ -15,7 +15,7 @@ Resources:
       Name: "/node-react-aws/DB_CREDENTIALS"
       GenerateSecretString:
         PasswordLength: 16
-        ExcludeCharacters: '"@/'
+        ExcludeCharacters: '"@/\\$()[]=;|&`'
         SecretStringTemplate: !Sub |
           {
             "username": "${RDSMasterUsername}"
