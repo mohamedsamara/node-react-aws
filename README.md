@@ -9,7 +9,7 @@ This project consists of a React frontend, a Node.js backend, and infrastructure
 - Infrastructure: The infrastructure is defined using CloudFormation templates and organized into separate stacks for modularity.
 - CI/CD Pipeline: The project uses AWS CodePipeline, CodeBuild, and CodeDeploy to automate the deployment process utilizing `buildspec.yml`, `buildspec-frontend.yml`, and `appspec.yml`.
 
-## ☁️&nbsp; CloudFormation Features
+## 📦&nbsp; CloudFormation Features
 
 - IAM Roles Stack: Defines IAM roles for AWS services, including CodeBuild, CodeDeploy, CodePipeline, and EC2.
 - S3 Buckets Stack: Contains S3 buckets for CodePipeline (backend and frontend) artifacts and frontend build (dist) artifacts.
