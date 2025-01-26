@@ -2,6 +2,7 @@ AWSTemplateFormatVersion: "2010-09-09"
 Parameters:
   GitHubConnectionArn:
     Type: String
+
 Resources:
   # IAM Role for CodeBuild Service
   CodeBuildServiceRole:

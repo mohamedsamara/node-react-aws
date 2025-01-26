@@ -1,17 +1,21 @@
 AWSTemplateFormatVersion: "2010-09-09"
+Parameters:
+  ProjectName:
+    Type: String
+
 Resources:
   # SSM Parameter Store for DB Host (RDS endpoint)
   DBHostParameter:
     Type: AWS::SSM::Parameter
     Properties:
-      Name: "/node-react-aws/DB_HOST"
+      Name: !Sub "/${ProjectName}/DB_HOST"
       Type: "String"
       Value: !ImportValue DBEndpoint
 
   DBNameParameter:
     Type: AWS::SSM::Parameter
     Properties:
-      Name: "/node-react-aws/DB_NAME"
+      Name: !Sub "/${ProjectName}/DB_NAME"
       Type: "String"
       Value: !ImportValue DBName
 
@@ -19,6 +23,6 @@ Resources:
   DBPortParameter:
     Type: AWS::SSM::Parameter
     Properties:
-      Name: "/node-react-aws/DB_PORT"
+      Name: !Sub "/${ProjectName}/DB_PORT"
       Type: "String"
       Value: "5432"

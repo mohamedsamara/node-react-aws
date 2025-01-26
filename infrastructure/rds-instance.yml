@@ -1,18 +1,21 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Parameters:
+  ProjectName:
+    Type: String
+
+  RDSMasterUsername:
+    Type: String
+
   DBName:
     Type: String
     Default: node_demo_database
-  RDSMasterUsername:
-    Type: String
-    Description: "The master username for the RDS instance, passed from the root stack."
 
 Resources:
   # Randomly generate DB Credentials in Secrets Manager
   DBCredentials:
     Type: AWS::SecretsManager::Secret
     Properties:
-      Name: "/node-react-aws/DB_CREDENTIALS"
+      Name: !Sub "/${ProjectName}/DB_CREDENTIALS"
       GenerateSecretString:
         PasswordLength: 16
         ExcludeCharacters: '"@/\\$()[]=;|&`'
@@ -31,8 +34,8 @@ Resources:
       DBInstanceClass: db.t3.micro
       Engine: postgres
       DBName: !Ref DBName
-      MasterUsername: !Sub "{{resolve:secretsmanager:/node-react-aws/DB_CREDENTIALS:SecretString:username}}"
-      MasterUserPassword: !Sub "{{resolve:secretsmanager:/node-react-aws/DB_CREDENTIALS:SecretString:password}}"
+      MasterUsername: !Sub "{{resolve:secretsmanager:/${ProjectName}/DB_CREDENTIALS:SecretString:username}}"
+      MasterUserPassword: !Sub "{{resolve:secretsmanager:/${ProjectName}/DB_CREDENTIALS:SecretString:password}}"
       AllocatedStorage: 20
       VPCSecurityGroups:
         - !ImportValue RDSSecurityGroupId

@@ -1,5 +1,22 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Parameters:
+  ProjectName:
+    Type: String
+    Description: "The project name (e.g., node-react-aws)"
+    Default: node-react-aws
+
+  # Github username
+  GitHubUser:
+    Type: String
+    Description: "The GitHub username that owns the repository. Used in AWS CodePipeline to define the source repository"
+    Default: mohamedsamara
+
+  # Github repo name
+  GitHubRepo:
+    Type: String
+    Description: "The name of the GitHub repository to be used in AWS CodePipeline for the source stage"
+    Default: node-react-aws
+
   GitHubConnectionArn:
     Type: String
     Description: "The ARN of the GitHub connection in AWS CodeStar Connections"
@@ -62,6 +79,7 @@ Resources:
       TemplateURL: "https://s3.amazonaws.com/node-react-infrastructure-bucket/rds-instance.yml"
       Parameters:
         RDSMasterUsername: !Ref RDSMasterUsername
+        ProjectName: !Ref ProjectName
 
   # SSM Stack
   SSMStack:
@@ -69,6 +87,8 @@ Resources:
     DependsOn: RDSInstanceStack
     Properties:
       TemplateURL: "https://s3.amazonaws.com/node-react-infrastructure-bucket/ssm.yml"
+      Parameters:
+        ProjectName: !Ref ProjectName
 
   # CloudFront Stack
   CloudFrontStack:
@@ -88,3 +108,5 @@ Resources:
       TemplateURL: "https://s3.amazonaws.com/node-react-infrastructure-bucket/codepipeline.yml"
       Parameters:
         GitHubConnectionArn: !Ref GitHubConnectionArn
+        GitHubUser: !Ref GitHubUser
+        GitHubRepo: !Ref GitHubRepo

@@ -52,7 +52,7 @@ ssh -i /path/to/your-key-pair.pem ec2-user@<EC2_INSTANCE_PUBLIC_IP>
    Run the following command to upload your infrastructure templates to an S3 bucket:
 
    ```bash
-    aws s3 cp ./infrastructure/ <your-bucket-name> --recursive
+    aws s3 cp ./infrastructure/ s3://<your-bucket-name> --recursive
    ```
 
    Make sure that the S3 bucket [your-bucket-name] exists.

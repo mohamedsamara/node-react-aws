@@ -3,20 +3,16 @@ Parameters:
   GitHubConnectionArn:
     Type: String
 
-  # Github repo name
+  GitHubUser:
+    Type: String
+
   GitHubRepo:
     Type: String
-    Default: node-react-aws
 
   # Github repo branch
   GitHubBranch:
     Type: String
     Default: main
-
-  # Github username
-  GitHubUser:
-    Type: String
-    Default: mohamedsamara
 
 Resources:
   CodePipeline:

@@ -12,7 +12,6 @@ Parameters:
 
   WebServerPort:
     Type: Number
-    Description: "Port for the web server (e.g., 3000)"
 
 Resources:
   EC2Instance:
